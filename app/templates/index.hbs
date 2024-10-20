@@ -1,0 +1,112 @@
+{{page-title "Index"}}
+{{outlet}}
+
+	<div class="pl-[4vmin] pr-[4vmin] md:pr-8 md:pl-8 border-b border-base-300">
+		<div class="container mx-auto pt-px">
+      <div id="step-name" class="min-h-[calc(100vh-88px)] flex items-center justify-center">
+        <div class="form max-w-96 w-full flex flex-col gap-8">
+          <h1 class="text-5xl font-bold">
+            I'm Matt.<br>
+            And you?
+          </h1>
+          <div class="field">
+            <label class="form-control w-full">
+              <div class="label">
+                <span class="label-text">My name is...</span>
+              </div>
+              <Input @type="text" @value={{this.model.name}} placeholder="Enter your name" class={{if this.showNameError "input input-bordered w-full input-error" "input input-bordered w-full"}}/>
+            </label>
+            <div class="label">
+              <span class="label-text-alt">
+                {{#if this.showNameError}}
+                  <span class="text-error">{{this.nameErrorMessage}}</span>
+                {{/if}}
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center">
+            <a class={{if this.isNameValid "text-underline text-primary cursor-pointer" "text-underline text-gray-300"}} disabled={{not this.isNameValid}} {{on "click" this.scrollEmail}}>Next step</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+	<div class="pl-[4vmin] pr-[4vmin] md:pr-8 md:pl-8 border-b border-base-300">
+		<div class="container mx-auto pt-px">
+      <div id="step-email" class="min-h-[calc(100vh)] flex items-center justify-center">
+        <div class="form max-w-96 w-full flex flex-col gap-8">
+          <h1 class="text-5xl font-bold">
+            What's your address?
+          </h1>
+          <div class="field">
+            <label class="form-control w-full">
+              <div class="label">
+                <span class="label-text">My e-mail is...</span>
+              </div>
+              <Input type="text" @value={{this.model.email}} placeholder="Enter your email address" class={{if this.showEmailError "input input-bordered w-full input-error" "input input-bordered w-full"}} />
+            </label>
+            <div class="label">
+              <span class="label-text-alt">
+                {{#if this.showEmailError}}
+                  <span class="text-error">{{this.emailErrorMessage}}</span>
+                {{/if}}
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center">
+            <a class={{if this.isEmailValid "text-underline text-primary cursor-pointer" "text-underline text-gray-300"}} disabled={{not this.isEmailValid}}  {{on "click" this.scrollMessage}}>Next step</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+	<div class="pl-[4vmin] pr-[4vmin] md:pr-8 md:pl-8 border-b border-base-300">
+		<div class="container mx-auto pt-px">
+      <div id="step-message" class="min-h-[calc(100vh)] flex items-center justify-center">
+        <div class="form max-w-96 w-full flex flex-col gap-8">
+          {{#if this.isSubmitError}}
+            <div role="alert" class="alert alert-error">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>There was an error submitting the form.</span>
+            </div>
+          {{/if}}
+          <h1 class="text-5xl font-bold">
+            Great.<br>
+            Your inquiry?
+          </h1>
+          <div class="field">
+          <label class="form-control w-full">
+            <div class="label">
+              <span class="label-text">What I want you to know...</span>
+            </div>
+            <Input type="text" @value={{this.model.message}} placeholder="Enter your message"  class={{if this.showMessageError "input input-bordered w-full input-error" "input input-bordered w-full"}} />
+          </label>
+          <div class="label">
+            <span class="label-text-alt">
+              {{#if this.showMessageError}}
+                <span class="text-error">{{this.messageErrorMessage}}</span>
+              {{/if}}
+            </span>
+          </div>
+        </div>
+          <div class="flex items-center justify-center">
+            {{#if (not this.isLoading)}}
+              <button class="btn btn-primary" disabled={{not this.isValid}} {{on "click" this.submit}}>Submit</button>
+            {{else}}
+              <span class="loading loading-ring loading-lg"></span>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
