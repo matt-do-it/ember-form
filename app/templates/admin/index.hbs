@@ -1,0 +1,27 @@
+<div class="border-b border-base-300">
+  <div class="container mx-auto">
+    <div class="mt-4 mb-4">
+      <div class="prose">
+        <h1>All contacts</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto">
+  <table class="table">
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Message</th>
+    </tr>
+    {{#each this.model as |contact|}}
+      <tr>
+        <td>{{contact.email}}</td>
+        <td>{{contact.name}}</td>
+        <td>{{contact.message}}</td>
+      </tr>
+    {{/each}}
+  </table>
+
+</div>
