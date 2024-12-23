@@ -7,7 +7,10 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('mail');
-  this.route('message');
+  this.route('index', { path: '/' });
+  this.route('login');
   this.route('submit');
+  this.route('admin', function (routes) {
+    this.route('index', { path: '/' });
+  });
 });

@@ -1,18 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./app/**/*.{gjs,gts,hbs,html,js,ts}'],
-theme: {
+  theme: {
     screens: {
-      'sm': '640px',
+      sm: '640px',
       // => @media (min-width: 640px) { ... }
 
-      'md': '768px',
+      md: '768px',
       // => @media (min-width: 768px) { ... }
 
-      'lg': '1024px',
+      lg: '1024px',
       // => @media (min-width: 1024px) { ... }
 
-      'xl': '1200px',
+      xl: '1200px',
       // => @media (min-width: 1280px) { ... }
 
       '2xl': '1536px',
@@ -31,15 +31,10 @@ theme: {
         '"Fira Sans"',
         '"Droid Sans"',
         '"Helvetica Neue"',
-        'sans-serif'
+        'sans-serif',
       ],
-      serif: [
-      	'Georgia', 'Times', 'serif'],
-      mono: [
-        'Menlo',
-        '"Courier"',
-        'monospace',
-      ],
+      serif: ['Georgia', 'Times', 'serif'],
+      mono: ['Menlo', '"Courier"', 'monospace'],
     },
 
     fontSize: {
@@ -59,15 +54,8 @@ theme: {
     },
   },
   daisyui: {
-    themes: ["light"],
+    themes: ['light'],
   },
-  plugins: [
-  	  require("daisyui"),
-  	  require('@tailwindcss/typography'),
-  ],
-  plugins: [
-    require('@tailwindcss/typography'),
-    require("daisyui"),
-
-  ],
+  plugins: [require('daisyui'), require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('daisyui')],
 };

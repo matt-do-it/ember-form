@@ -3,10 +3,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
   name: validator('presence', true),
-  email: [
-    validator('presence', true),
-    validator('format', { type: 'email' })
-  ],
+  email: [validator('presence', true), validator('format', { type: 'email' })],
   message: validator('presence', true),
 });
 

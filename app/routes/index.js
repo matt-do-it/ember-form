@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import { capitalize } from '@ember/string';
 
 export default class IndexRoute extends Route {
   @service store;
@@ -12,7 +13,7 @@ export default class IndexRoute extends Route {
         id: 'global',
         name: null,
         email: null,
-        message: null
+        message: null,
       });
     }
 

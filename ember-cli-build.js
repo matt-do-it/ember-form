@@ -5,8 +5,8 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
     'ember-fetch': {
-      nativePromise: true
-    }
+      nativePromise: true,
+    },
   });
 
   const { Webpack } = require('@embroider/webpack');
@@ -43,6 +43,5 @@ module.exports = function (defaults) {
         },
       },
     },
-
   });
 };

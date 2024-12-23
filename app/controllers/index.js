@@ -12,12 +12,16 @@ export default class IndexController extends Controller {
 
   @action
   scrollEmail() {
-    document.getElementById("step-email").scrollIntoView({ behavior: 'smooth', block: 'center' })
+    document
+      .getElementById('step-email')
+      .scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   @action
   scrollMessage() {
-    document.getElementById("step-message").scrollIntoView({ behavior: 'smooth', block: 'center' })
+    document
+      .getElementById('step-message')
+      .scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   @action
@@ -26,16 +30,28 @@ export default class IndexController extends Controller {
       this.isSubmitError = false;
       this.isLoading = true;
 
-      this.backend.submit(this.model).then(function(response) {
-        this.isLoading = false;
-        if (response.ok) {
-          this.router.transitionTo('submit');
-        } else {
-          console.log(response);
-          this.isSubmitError = true;
-          document.getElementById('step-message').scrollIntoView();
-        }
-      }.bind(this));
+      this.backend
+        .submit(this.model)
+        .then(
+          function (response) {
+            this.isLoading = false;
+            if (response.ok) {
+              this.router.transitionTo('submit');
+            } else {
+              console.log(response);
+              this.isSubmitError = true;
+              document.getElementById('step-message').scrollIntoView();
+            }
+          }.bind(this),
+        )
+        .catch(
+          function (error) {
+            console.log(error);
+
+            this.isSubmitError = true;
+            this.isLoading = false;
+          }.bind(this),
+        );
     }
   }
 
@@ -94,4 +110,3 @@ export default class IndexController extends Controller {
     return this.model.validations.isValid;
   }
 }
-
