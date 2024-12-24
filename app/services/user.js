@@ -20,4 +20,13 @@ export default class UserService extends Service {
         }.bind(this),
       );
   }
+
+  logout() {
+    window.localStorage.removeItem('token');
+    return Promise.resolve('Success');
+  }
+
+  isLoggedIn() {
+    return window.localStorage.getItem('token') != null;
+  }
 }
