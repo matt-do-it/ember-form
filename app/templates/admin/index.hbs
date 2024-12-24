@@ -8,20 +8,66 @@
   </div>
 </div>
 
-<div class="container mx-auto">
-  <table class="table">
-    <tr>
-      <th>Email</th>
-      <th>Name</th>
-      <th>Message</th>
-    </tr>
-    {{#each this.model as |contact|}}
-      <tr>
-        <td>{{contact.email}}</td>
-        <td>{{contact.name}}</td>
-        <td>{{contact.message}}</td>
-      </tr>
-    {{/each}}
-  </table>
+<div class="container mx-auto mt-8">
+  <div class="flex items-center justify-between">
+    <div class="">&nbsp;</div>
+    <div class="">
+      <div class="flex items-center gap-4">
+        <div class="text-sm">
+          Per page
+        </div>
+        <select class="select select-bordered" {{on "change" this.setLimit}}>
+          {{#each this.limitList as |o|}}
+            <option selected={{o.isActive}}>{{o.limit}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="border border-base-200 rounded-xl mt-2 mb-2">
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this.model as |contact|}}
+            <tr>
+              <td>{{contact.email}}</td>
+              <td>{{contact.name}}</td>
+              <td>{{contact.message}}</td>
+              <td>{{contact.createdAt}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between">
+    <div class="text-sm">
+      Showing
+      {{this.offsetFormatted}}
+      to
+      {{this.offsetNextFormatted}}
+      of
+      {{this.totalRecords}}
+    </div>
+
+    <div class="join">
+      {{#each this.pageList as |page|}}
+        <LinkTo
+          @route="admin"
+          @query={{hash offset=page.offset limit=this.limit}}
+          class={{if page.isActive "join-item btn" "join-item btn btn-active"}}
+        >{{page.title}}</LinkTo>
+      {{/each}}
+    </div>
+  </div>
 
 </div>
