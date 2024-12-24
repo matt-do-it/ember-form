@@ -18,6 +18,13 @@ export default class ApplicationController extends Controller {
   }
 
   get isLoggedIn() {
-    return this.user.isLoggedIn();
+    return this.user.isLoggedIn;
   }
+
+  get profile() {
+    return {
+      email: this.user.email
+    }
+  }
+
 }

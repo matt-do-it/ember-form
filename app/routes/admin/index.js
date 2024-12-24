@@ -3,6 +3,8 @@ import { service } from '@ember/service';
 
 export default class AdminIndexRoute extends Route {
   @service store;
+  @service router;
+  @service user;
 
   queryParams = {
     offset: {
@@ -31,5 +33,12 @@ export default class AdminIndexRoute extends Route {
       });
 
     return model;
+  }
+
+  async beforeModel(transition) {
+    this.user.validateLogin()
+        .catch(function(e) {
+        this.router.transitionTo("login");
+    }.bind(this));
   }
 }

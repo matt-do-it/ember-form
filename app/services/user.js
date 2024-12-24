@@ -4,6 +4,9 @@ import ENV from 'ember-form/config/environment';
 import { tracked } from '@glimmer/tracking';
 
 export default class UserService extends Service {
+  @tracked isLoggedIn = false;
+  @tracked email = null;
+
   login(model) {
     var hash = model.getProperties('username', 'password');
     return fetch(ENV.APP.API_URL + 'api/login', {
@@ -17,16 +20,38 @@ export default class UserService extends Service {
       .then(
         function (e) {
           window.localStorage.setItem('token', e.token);
+          console.log(e);
+          this.isLoggedIn = true;
+          this.email = e.user;
         }.bind(this),
       );
   }
 
   logout() {
     window.localStorage.removeItem('token');
+    this.token = null;
     return Promise.resolve('Success');
   }
 
-  isLoggedIn() {
-    return window.localStorage.getItem('token') != null;
+  async validateLogin() {
+    let token = window.localStorage.getItem("token");
+    if (token) {
+      return fetch(ENV.APP.API_URL + 'api/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + token
+        }
+      })
+      .then((e) => e.json())
+      .then(
+        function (e) {
+          this.isLoggedIn = true;
+          this.email = e.user;
+        }.bind(this),
+      );
+    } else {
+      return Promise.reject("Error");
+    }
   }
 }
