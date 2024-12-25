@@ -11,4 +11,5 @@ export default class ContactModel extends Model.extend(Validations) {
   @attr name;
   @attr email;
   @attr message;
+  @attr createdAt;
 }

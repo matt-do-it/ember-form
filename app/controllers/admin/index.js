@@ -106,6 +106,14 @@ export default class AdminIndexController extends Controller {
         limit: 20,
         isActive: this.limit == 20,
       },
+      {
+        limit: 50,
+        isActive: this.limit == 50,
+      },
+      {
+        limit: 100,
+        isActive: this.limit == 100,
+      }
     ];
   }
 }

@@ -1,4 +1,4 @@
-<div class="border-b border-base-300 mb-8">
+<div class="border-b border-base-300 mb-24">
   <div class="container mx-auto">
     <div class="mt-4 mb-4">
       <div class="prose">
@@ -10,6 +10,8 @@
 
 {{#if this.isSubmitError}}
   <div class="mx-auto container">
+  <div class="w-3/5">
+
     <div role="alert" class="alert alert-error">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,10 +28,12 @@
       </svg>
       <span>Login failed. Please check your credentials.</span>
     </div>
+    </div>
   </div>
 {{/if}}
 
-<div class="mx-auto container">
+<div class="mx-auto container mt-8 mb-32">
+<div class="w-3/5">
   <div class="field">
     <label class="form-control w-full">
       <div class="label">
@@ -92,6 +96,7 @@
         {{/if}}
       </span>
     </div>
+  </div>
   </div>
 
   <button class="btn btn-primary" {{on "click" this.submit}}>Login</button>

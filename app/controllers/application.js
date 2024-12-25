@@ -22,8 +22,11 @@ export default class ApplicationController extends Controller {
   }
 
   get profile() {
+    var shortName = this.user.name.split(" ").map((n)=>n[0]).join(".");
     return {
-      email: this.user.email
+      user: this.user.user,
+      name: this.user.name,
+      shortName: shortName
     }
   }
 

@@ -5,7 +5,8 @@ import { tracked } from '@glimmer/tracking';
 
 export default class UserService extends Service {
   @tracked isLoggedIn = false;
-  @tracked email = null;
+  @tracked user = null;
+  @tracked name = null;
 
   login(model) {
     var hash = model.getProperties('username', 'password');
@@ -22,7 +23,8 @@ export default class UserService extends Service {
           window.localStorage.setItem('token', e.token);
           console.log(e);
           this.isLoggedIn = true;
-          this.email = e.user;
+          this.user = e.user;
+          this.name = e.name;
         }.bind(this),
       );
   }
@@ -47,7 +49,8 @@ export default class UserService extends Service {
       .then(
         function (e) {
           this.isLoggedIn = true;
-          this.email = e.user;
+          this.user = e.user;
+          this.name = e.name;
         }.bind(this),
       );
     } else {
