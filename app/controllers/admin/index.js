@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 export default class AdminIndexController extends Controller {
   queryParams = ['offset', 'limit'];
 
+  @service user;
   @service router;
   @service backend;
 
@@ -116,4 +117,27 @@ export default class AdminIndexController extends Controller {
       }
     ];
   }
+
+    @action
+  logout() {
+    this.user.logout().then(
+      function (e) {
+        this.router.transitionTo('login');
+      }.bind(this),
+    );
+  }
+
+  get isLoggedIn() {
+    return this.user.isLoggedIn;
+  }
+
+  get profile() {
+    var shortName = this.user.name.split(" ").map((n)=>n[0]).join(".");
+    return {
+      user: this.user.user,
+      name: this.user.name,
+      shortName: shortName
+    }
+  }
+
 }

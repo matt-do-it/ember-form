@@ -1,6 +1,50 @@
 {{page-title "Get in touch"}}
 {{outlet}}
 
+<div class="border-b border-base-300">
+  <div class="ml-[4vmin] mr-[4vmin] md:mr-8 md:ml-8">
+    <div class="container mx-auto pt-px">
+      <div class="flex items-center h-[64px] md:h-[88px]">
+        <div class="flex-1 mt-[-5px] md:mt-0 md:h-[40px]">
+          <a
+            href="/index.html"
+            class="align-baseline font-extrabold text-[22px] md:text-2xl tracking-tight antialiased"
+          >MATT</a>
+        </div>
+
+        <div class="flex-none">
+          <ul class="menu menu-horizontal px-1 text-sm md:text-base">
+            <li><a href="/certificates/index.html">Certifications</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+        {{#if this.isLoggedIn}}
+          <div class="dropdown dropdown-end">
+
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+              <div class="avatar placeholder">
+                <div class="bg-neutral text-neutral-content w-12 rounded-full">
+                  <span>{{this.profile.shortName}}</span>
+                </div>
+              </div>
+            </div>
+            <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li class="p-2">Logged in as: {{this.profile.user}}</li>
+              <li><a href="" {{on "click" this.logout}}>Logout</a></li>
+            </ul>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
 <div class="pl-[4vmin] pr-[4vmin] md:pr-8 md:pl-8 border-b border-base-300">
   <div class="container mx-auto pt-px">
     <div
@@ -167,4 +211,49 @@
       </div>
     </div>
   </div>
+</div>
+
+	<div class="bg-neutral text-neutral-content mt-32">
+		<div class="ml-[4vmin] mr-[4vmin] md:mr-8 md:ml-8 ">
+		<div class="container mx-auto">
+<footer class="footer pt-16 pb-32">
+  <aside>
+   <svg width="50" height="50" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <rect x="10" y="10" width="80" height="80" style="fill:rgb(0,93,170);"/>
+    <rect x="110" y="10" width="80" height="80" style="fill:rgb(0,142,214);"/>
+    <rect x="10" y="110" width="80" height="80" style="fill:rgb(0,71,190);"/>
+</svg>
+
+    <p>
+      Matt Herold
+      <br />
+      &copy; Copyright 2006-2024
+    </p>
+  </aside>
+  <nav>
+    <h6 class="footer-title">Tools - Publishing</h6>
+    <a href="https://www.matt-herold.de/blog/ghost/#/dashboard" class="link link-hover">Ghost</a>
+    <a href="https://app.netlify.com/login" class="link link-hover">Netlify</a>
+    <a href="https://github.com/matt-do-it" class="link link-hover">Github</a>
+    <h6 class="footer-title pt-16">Tools - Data</h6>
+    <a href="https://www.matt-herold.de/contact/admin/" class="link link-hover">Contacts</a>
+  </nav>
+  <nav>
+    <h6 class="footer-title">Tools - Datascience</h6>
+    <a href="http://10.0.2.1:9000/jupyter/lab" class="link link-hover">Notebooks</a>
+    <a href="https://accounts.datastax.com/session-service/v1/login" class="link link-hover">Cassandra</a>
+    <a href="https://mattdo.budibase.app/app/contact" class="link link-hover">Data Admin</a>
+    <h6 class="footer-title  pt-16">Tools - Platforms</h6>
+    <a href="https://cloud.google.com/gcp/" class="link link-hover">GCP</a>
+    <a href="https://www.digitalocean.com" class="link link-hover">Digital Ocean</a>
+  </nav>
+  <nav>
+    <h6 class="footer-title">Legal</h6>
+    <a class="link link-hover">Imprint</a>
+  </nav>
+  <nav>
+  </nav>
+</footer>
+</div>
+</div>
 </div>
