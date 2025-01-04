@@ -1,0 +1,21 @@
+<label class="form-control w-full">
+  <div class="label">
+    <span class="label-text">{{@label}}</span>
+  </div>
+  <Textarea
+    @value={{(get @model @path)}}
+    placeholder="Type here"
+    class="input input-bordered input-sm w-full h-32 p-1 max-w-lg
+      {{if
+        (not (get @model (concat 'validations.attrs.' @path '.isValid')))
+        'input-error'
+      }}"
+  />
+  <div class="label">
+    {{#if (not (get @model (concat "validations.attrs." @path ".isValid")))}}
+      <span class="label-text-alt text-error">
+        {{(get @model (concat "validations.attrs." @path ".messages"))}}
+      </span>
+    {{/if}}
+  </div>
+</label>

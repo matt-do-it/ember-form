@@ -18,7 +18,7 @@
           <label class="input input-bordered input-sm flex items-center gap-2">
             <Input
               @type="text"
-              @value={{this.filter}}
+              @value={{this.admin.filter}}
               class="grow"
               placeholder="Suche"
             />
@@ -44,9 +44,9 @@
           </div>
           <select
             class="select select-sm select-bordered"
-            {{on "change" this.setLimit}}
+            {{on "change" this.admin.setLimit}}
           >
-            {{#each this.limitList as |o|}}
+            {{#each this.admin.limitList as |o|}}
               <option selected={{o.isActive}}>{{o.limit}}</option>
             {{/each}}
           </select>
@@ -57,16 +57,18 @@
 
   <div class="flex-1 h-32 container mx-auto flex flex-col">
     <div class="border border-base-200 rounded-xl mt-2 mb-2 overflow-auto">
-      <table class="table table-border table-pin-rows table-fixed w-full">
+      <table
+        class="table table-border table-sm table-pin-rows table-fixed w-full"
+      >
         <thead>
           <tr>
-            {{#each this.columns as |column|}}
+            {{#each this.admin.columns as |column|}}
               <th
                 class="bg-base-100 cursor-pointer"
-                {{on "click" (fn this.updateSort column.valuePath)}}
+                {{on "click" (fn this.admin.updateSort column.valuePath)}}
               >
                 {{column.name}}
-                {{#if (eq column.valuePath this.sortValuePath)}}
+                {{#if (eq column.valuePath this.admin.sortValuePath)}}
                   {{#if this.sortDesc}}
                     ▲
                   {{else}}
@@ -79,9 +81,15 @@
         </thead>
         <tbody>
           {{#each this.model as |contact|}}
-            <tr class="hover {{if (eq contact this.selection) 'bg-neutral text-neutral-content'}}"
-            {{on "click" (fn this.updateSelection contact)}}>
-              {{#each this.columns as |column|}}
+            <tr
+              class="hover
+                {{if
+                  (eq contact this.admin.selection)
+                  'bg-neutral text-neutral-content'
+                }}"
+              {{on "click" (fn this.admin.updateSelection contact)}}
+            >
+              {{#each this.admin.columns as |column|}}
                 <td>{{(get contact column.valuePath)}}</td>
               {{/each}}
             </tr>
@@ -98,31 +106,33 @@
           <button
             class="btn btn-sm btn-primary"
             type="button"
+            {{on "click" this.create}}
           >Hinzufügen</button>
         </div>
         <div class="flex items-center gap-4">
           <div class="text-sm">
             Zeige
-            {{this.offsetFormatted}}
+            {{this.admin.offsetFormatted}}
             bis
-            {{this.offsetNextFormatted}}
+            {{this.admin.offsetNextFormatted}}
             von
-            {{this.totalRecords}}
+            {{this.admin.totalRecords}}
           </div>
-
-          <div class="join">
-            {{#each this.pageList as |page|}}
-              <LinkTo
-                @route="admin"
-                @query={{hash offset=page.offset limit=this.limit}}
-                class={{if
-                  page.isActive
-                  "join-item btn btn-sm"
-                  "join-item btn btn-sm btn-active"
-                }}
-              >{{page.title}}</LinkTo>
-            {{/each}}
-          </div>
+          {{#if (gt this.admin.pageList.length 1)}}
+            <div class="join">
+              {{#each this.admin.pageList as |page|}}
+                <LinkTo
+                  @route="admin"
+                  @query={{hash offset=page.offset limit=this.admin.limit}}
+                  class={{if
+                    page.isActive
+                    "join-item btn btn-sm"
+                    "join-item btn btn-sm btn-active"
+                  }}
+                >{{page.title}}</LinkTo>
+              {{/each}}
+            </div>
+          {{/if}}
         </div>
       </div>
 

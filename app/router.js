@@ -12,5 +12,6 @@ Router.map(function () {
   this.route('submit');
   this.route('admin', function (routes) {
     this.route('index', { path: '/' });
+    this.route('edit', { path: '/edit/:id' });
   });
 });

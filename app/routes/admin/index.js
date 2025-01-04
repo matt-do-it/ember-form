@@ -2,57 +2,7 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
 export default class AdminIndexRoute extends Route {
-  @service store;
-  @service router;
-  @service user;
-
-  queryParams = {
-    offset: {
-      refreshModel: true,
-    },
-    limit: {
-      refreshModel: true,
-    },
-    sort: {
-      refreshModel: true,
-    },
-    filter: {
-      refreshModel: true,
-    },
-  };
-
-  model(params) {
-    let offset = params.offset;
-    if (!offset) {
-      offset = 0;
-    }
-    let limit = params.limit;
-    if (!limit) {
-      limit = limit;
-    }
-    let sort = params.sort;
-    let filter = params.filter;
-
-    var model = this.store
-      .query('contact', {
-        page: { offset: offset, limit: limit },
-        sort: sort,
-        filter: filter
-      })
-      .then((result) => {
-        let meta = result.meta;
-        this.controllerFor('admin/index').totalRecords = meta.total;
-        return result;
-      });
-
-    return model;
-  }
-
-  async beforeModel(transition) {
-    this.user.validateLogin().catch(
-      function (e) {
-        this.router.transitionTo('login');
-      }.bind(this),
-    );
+  async model(params) {
+    return this.modelFor('admin');
   }
 }
