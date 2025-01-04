@@ -19,6 +19,8 @@ export default class AdminIndexController extends Controller {
 
   @tracked filter = '';
 
+  @tracked selection = null;
+
   get offsetFormatted() {
     return this.offset + 1;
   }
@@ -113,6 +115,11 @@ export default class AdminIndexController extends Controller {
     }
   }
 
+  @action updateSelection(value, event) {
+    this.selection = value;
+  }
+
+
   get limitList() {
     return [
       {
@@ -137,12 +144,12 @@ export default class AdminIndexController extends Controller {
   get columns() {
     return [
       {
-        name: `Email`,
-        valuePath: `email`,
-      },
-      {
         name: `Name`,
         valuePath: `name`,
+      },
+       {
+        name: `Email`,
+        valuePath: `email`,
       },
       {
         name: `Message`,

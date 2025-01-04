@@ -16,7 +16,7 @@ export default class AdminIndexRoute extends Route {
     sort: {
       refreshModel: true,
     },
-    fjlter: {
+    filter: {
       refreshModel: true,
     },
   };
@@ -35,7 +35,9 @@ export default class AdminIndexRoute extends Route {
 
     var model = this.store
       .query('contact', {
-        page: { offset: offset, limit: limit, sort: sort, filter: filter },
+        page: { offset: offset, limit: limit },
+        sort: sort,
+        filter: filter
       })
       .then((result) => {
         let meta = result.meta;

@@ -22,7 +22,6 @@
               class="grow"
               placeholder="Suche"
             />
-
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -58,12 +57,12 @@
 
   <div class="flex-1 h-32 container mx-auto flex flex-col">
     <div class="border border-base-200 rounded-xl mt-2 mb-2 overflow-auto">
-      <table class="table table-border w-full">
+      <table class="table table-border table-pin-rows table-fixed w-full">
         <thead>
           <tr>
             {{#each this.columns as |column|}}
               <th
-                class="sticky top-0 bg-base-100 cursor-pointer"
+                class="bg-base-100 cursor-pointer"
                 {{on "click" (fn this.updateSort column.valuePath)}}
               >
                 {{column.name}}
@@ -80,7 +79,8 @@
         </thead>
         <tbody>
           {{#each this.model as |contact|}}
-            <tr>
+            <tr class="hover {{if (eq contact this.selection) 'bg-neutral text-neutral-content'}}"
+            {{on "click" (fn this.updateSelection contact)}}>
               {{#each this.columns as |column|}}
                 <td>{{(get contact column.valuePath)}}</td>
               {{/each}}
