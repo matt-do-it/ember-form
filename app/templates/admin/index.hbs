@@ -1,130 +1,131 @@
 {{page-title "Admin"}}
 
 <div class="flex flex-col h-screen">
-<div class="border-b border-base-300">
-  <div class="ml-[4vmin] mr-[4vmin] md:mr-8 md:ml-8">
-    <div class="container mx-auto pt-px">
-      <div class="flex items-center h-[64px] md:h-[64px]">
-        <div class="flex-1 mt-[-5px] md:mt-0 md:h-[40px]">
-          <a
-            href="/index.html"
-            class="align-baseline font-extrabold text-l leading-[40px]"
-          ><img class="inline mr-2" src="https://www.matt-herold.de/assets/pictures/logo.svg" width="32"> BACKEND</a>
-        </div>
+  <AdminHeader />
 
-        <div class="flex-none">
-          <ul class="menu menu-horizontal px-1 text-sm md:text-base">
-          </ul>
-        </div>
-        {{#if this.isLoggedIn}}
-          <div class="dropdown dropdown-end">
+  <div class="container mx-auto mt-4 flex-none">
+    <div class="inline-block">
+      <div role="tablist" class="tabs tabs-lifted">
+        <a role="tab" class="tab tab-active">Kontakte</a>
+      </div>
+    </div>
+  </div>
 
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-              <div class="avatar placeholder">
-                <div class="bg-neutral text-neutral-content w-10 rounded-full">
-                  <span>{{this.profile.shortName}}</span>
-                </div>
-              </div>
-            </div>
-            <ul
-              tabindex="0"
-              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+  <div class="container mx-auto mt-4 flex-none flex flex-col">
+    <div class="flex items-center justify-between">
+      <div class="">
+        <div class="flex items-center gap-4">
+          <label class="input input-bordered input-sm flex items-center gap-2">
+            <Input
+              @type="text"
+              @value={{this.filter}}
+              class="grow"
+              placeholder="Suche"
+            />
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              class="h-4 w-4 opacity-70"
             >
-              <li class="p-2">Logged in as: {{this.profile.user}}</li>
-              <li><a href="" {{on "click" this.logout}}>Logout</a></li>
-            </ul>
-          </div>
-        {{/if}}
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="container mx-auto mt-4">
-<div class="inline-block">
-<div role="tablist" class="tabs tabs-lifted">
-  <a role="tab" class="tab tab-active">Kontakte</a>
-  <a role="tab" class="tab">Tab 2</a>
-</div>
-</div>
-</div>
-
-<div class="container mx-auto mt-4 flex flex-col">
-  <div class="flex items-center justify-between">
-    <div class="">&nbsp;</div>
-    <div class="">
-      <div class="flex items-center gap-4">
-        <div class="text-sm">
-          Per page
+              <path
+                fill-rule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </label>
         </div>
-        <select class="select select-sm select-bordered" {{on "change" this.setLimit}}>
-          {{#each this.limitList as |o|}}
-            <option selected={{o.isActive}}>{{o.limit}}</option>
-          {{/each}}
-        </select>
+      </div>
+      <div class="">
+        <div class="flex items-center gap-4">
+          <div class="text-sm">
+            Pro Seite
+          </div>
+          <select
+            class="select select-sm select-bordered"
+            {{on "change" this.setLimit}}
+          >
+            {{#each this.limitList as |o|}}
+              <option selected={{o.isActive}}>{{o.limit}}</option>
+            {{/each}}
+          </select>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="container mx-auto mt-4 overflow-auto shrink grow">
-  <div class="border border-base-200 rounded-xl mt-2 mb-2">
-    <div class="">
-      <table class="table">
+  <div class="flex-1 h-32 container mx-auto flex flex-col">
+    <div class="border border-base-200 rounded-xl mt-2 mb-2 overflow-auto">
+      <table class="table table-border w-full">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Name</th>
-            <th>Message</th>
-            <th>CreatedAt</th>
+            {{#each this.columns as |column|}}
+              <th
+                class="sticky top-0 bg-base-100 cursor-pointer"
+                {{on "click" (fn this.updateSort column.valuePath)}}
+              >
+                {{column.name}}
+                {{#if (eq column.valuePath this.sortValuePath)}}
+                  {{#if this.sortDesc}}
+                    ▲
+                  {{else}}
+                    ▼
+                  {{/if}}
+                {{/if}}
+              </th>
+            {{/each}}
           </tr>
         </thead>
         <tbody>
           {{#each this.model as |contact|}}
             <tr>
-              <td>{{contact.id}}</td>
-              <td>{{contact.email}}</td>
-              <td>{{contact.name}}</td>
-              <td>{{contact.message}}</td>
-              <td>{{contact.createdAt}}</td>
+              {{#each this.columns as |column|}}
+                <td>{{(get contact column.valuePath)}}</td>
+              {{/each}}
             </tr>
           {{/each}}
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="flex-none border-t border-base-300">
+    <div class="container mx-auto mt-4 mb-4 flex flex-col">
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <button
+            class="btn btn-sm btn-primary"
+            type="button"
+          >Hinzufügen</button>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="text-sm">
+            Zeige
+            {{this.offsetFormatted}}
+            bis
+            {{this.offsetNextFormatted}}
+            von
+            {{this.totalRecords}}
+          </div>
+
+          <div class="join">
+            {{#each this.pageList as |page|}}
+              <LinkTo
+                @route="admin"
+                @query={{hash offset=page.offset limit=this.limit}}
+                class={{if
+                  page.isActive
+                  "join-item btn btn-sm"
+                  "join-item btn btn-sm btn-active"
+                }}
+              >{{page.title}}</LinkTo>
+            {{/each}}
+          </div>
+        </div>
       </div>
-  </div>
-</div>
-<div class=" border-t border-base-300">
-<div class="container mx-auto mt-4 mb-4 flex flex-col">
 
-  <div class="flex items-center justify-between">
-    <div class="flex items-center">
-      <button class="btn btn-sm btn-primary">Hinzufügen</button>
-    </div>
-    <div class="flex items-center gap-4">
-    <div class="text-sm">
-      Showing
-      {{this.offsetFormatted}}
-      to
-      {{this.offsetNextFormatted}}
-      of
-      {{this.totalRecords}}
-    </div>
-
-    <div class="join">
-      {{#each this.pageList as |page|}}
-        <LinkTo
-          @route="admin"
-          @query={{hash offset=page.offset limit=this.limit}}
-          class={{if page.isActive "join-item btn btn-sm" "join-item btn btn-sm btn-active"}}
-        >{{page.title}}</LinkTo>
-      {{/each}}
-    </div>
     </div>
   </div>
-
-</div>
-</div>
 </div>

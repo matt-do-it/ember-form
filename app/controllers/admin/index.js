@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class AdminIndexController extends Controller {
-  queryParams = ['offset', 'limit'];
+  queryParams = ['offset', 'limit', 'sort', 'filter'];
 
   @service user;
   @service router;
@@ -14,6 +14,10 @@ export default class AdminIndexController extends Controller {
 
   @tracked offset = 0;
   @tracked limit = 10;
+
+  @tracked sort = 'createdAt';
+
+  @tracked filter = '';
 
   get offsetFormatted() {
     return this.offset + 1;
@@ -97,6 +101,18 @@ export default class AdminIndexController extends Controller {
     this.offset = 0;
   }
 
+  @action updateSort(value, event) {
+    if (this.sort[0] == '-' && this.sort.substring(1) == value) {
+      this.sort = value;
+    } else {
+      if (this.sort == value) {
+        this.sort = '-' + value;
+      } else {
+        this.sort = value;
+      }
+    }
+  }
+
   get limitList() {
     return [
       {
@@ -114,30 +130,44 @@ export default class AdminIndexController extends Controller {
       {
         limit: 100,
         isActive: this.limit == 100,
-      }
+      },
     ];
   }
 
-    @action
-  logout() {
-    this.user.logout().then(
-      function (e) {
-        this.router.transitionTo('login');
-      }.bind(this),
-    );
+  get columns() {
+    return [
+      {
+        name: `Email`,
+        valuePath: `email`,
+      },
+      {
+        name: `Name`,
+        valuePath: `name`,
+      },
+      {
+        name: `Message`,
+        valuePath: `message`,
+      },
+      {
+        name: `Created at`,
+        valuePath: `createdAt`,
+      },
+    ];
   }
 
-  get isLoggedIn() {
-    return this.user.isLoggedIn;
-  }
-
-  get profile() {
-    var shortName = this.user.name.split(" ").map((n)=>n[0]).join(".");
-    return {
-      user: this.user.user,
-      name: this.user.name,
-      shortName: shortName
+  get sortDesc() {
+    if (this.sort[0] == '-') {
+      return true;
+    } else {
+      return false;
     }
   }
 
+  get sortValuePath() {
+    if (this.sort[0] == '-') {
+      return this.sort.substring(1);
+    } else {
+      return this.sort;
+    }
+  }
 }

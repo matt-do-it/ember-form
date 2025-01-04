@@ -36,25 +36,25 @@ export default class UserService extends Service {
   }
 
   async validateLogin() {
-    let token = window.localStorage.getItem("token");
+    let token = window.localStorage.getItem('token');
     if (token) {
       return fetch(ENV.APP.API_URL + 'api/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': "Bearer " + token
-        }
+          Authorization: 'Bearer ' + token,
+        },
       })
-      .then((e) => e.json())
-      .then(
-        function (e) {
-          this.isLoggedIn = true;
-          this.user = e.user;
-          this.name = e.name;
-        }.bind(this),
-      );
+        .then((e) => e.json())
+        .then(
+          function (e) {
+            this.isLoggedIn = true;
+            this.user = e.user;
+            this.name = e.name;
+          }.bind(this),
+        );
     } else {
-      return Promise.reject("Error");
+      return Promise.reject('Error');
     }
   }
 }

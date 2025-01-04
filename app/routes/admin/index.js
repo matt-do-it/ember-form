@@ -13,6 +13,12 @@ export default class AdminIndexRoute extends Route {
     limit: {
       refreshModel: true,
     },
+    sort: {
+      refreshModel: true,
+    },
+    fjlter: {
+      refreshModel: true,
+    },
   };
 
   model(params) {
@@ -24,8 +30,13 @@ export default class AdminIndexRoute extends Route {
     if (!limit) {
       limit = limit;
     }
+    let sort = params.sort;
+    let filter = params.filter;
+
     var model = this.store
-      .query('contact', { page: { offset: offset, limit: limit } })
+      .query('contact', {
+        page: { offset: offset, limit: limit, sort: sort, filter: filter },
+      })
       .then((result) => {
         let meta = result.meta;
         this.controllerFor('admin/index').totalRecords = meta.total;
@@ -36,9 +47,10 @@ export default class AdminIndexRoute extends Route {
   }
 
   async beforeModel(transition) {
-    this.user.validateLogin()
-        .catch(function(e) {
-        this.router.transitionTo("login");
-    }.bind(this));
+    this.user.validateLogin().catch(
+      function (e) {
+        this.router.transitionTo('login');
+      }.bind(this),
+    );
   }
 }

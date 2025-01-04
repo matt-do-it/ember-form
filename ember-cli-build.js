@@ -24,9 +24,7 @@ module.exports = function (defaults) {
     ],
     packagerOptions: {
       webpackConfig: {
-
         module: {
-
           rules: [
             {
               test: /\.css$/i,

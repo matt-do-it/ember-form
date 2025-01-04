@@ -1,12 +1,11 @@
-import Controller from '@ember/controller';
+import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 
-export default class ApplicationController extends Controller {
+export default class AdminHeader extends Component {
   @service user;
   @service router;
-  @tracked isSubmitError = false;
 
   @action
   logout() {

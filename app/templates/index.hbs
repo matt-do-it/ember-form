@@ -44,7 +44,6 @@
 
 </div>
 
-
 <div class="pl-[4vmin] pr-[4vmin] md:pr-8 md:pl-8 border-b border-base-300">
   <div class="container mx-auto pt-px">
     <div
@@ -198,14 +197,15 @@
           </div>
         </div>
         <div class="flex items-center justify-center">
-          {{#if (not this.isLoading)}}
+          {{#if this.isLoading}}
+            <span class="loading loading-ring loading-lg"></span>
+          {{else}}
             <button
               class="btn btn-primary"
               disabled={{not this.isValid}}
+              type="button"
               {{on "click" this.submit}}
             >Submit</button>
-          {{else}}
-            <span class="loading loading-ring loading-lg"></span>
           {{/if}}
         </div>
       </div>
@@ -213,47 +213,100 @@
   </div>
 </div>
 
-	<div class="bg-neutral text-neutral-content mt-32">
-		<div class="ml-[4vmin] mr-[4vmin] md:mr-8 md:ml-8 ">
-		<div class="container mx-auto">
-<footer class="footer pt-16 pb-32">
-  <aside>
-   <svg width="50" height="50" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <rect x="10" y="10" width="80" height="80" style="fill:rgb(0,93,170);"/>
-    <rect x="110" y="10" width="80" height="80" style="fill:rgb(0,142,214);"/>
-    <rect x="10" y="110" width="80" height="80" style="fill:rgb(0,71,190);"/>
-</svg>
+<div class="bg-neutral text-neutral-content mt-32">
+  <div class="ml-[4vmin] mr-[4vmin] md:mr-8 md:ml-8">
+    <div class="container mx-auto">
+      <footer class="footer pt-16 pb-32">
+        <aside>
+          <svg
+            width="50"
+            height="50"
+            viewBox="0 0 200 200"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xml:space="preserve"
+            xmlns:serif="http://www.serif.com/"
+            style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+          >
+            <rect
+              x="10"
+              y="10"
+              width="80"
+              height="80"
+              style="fill:rgb(0,93,170);"
+            />
+            <rect
+              x="110"
+              y="10"
+              width="80"
+              height="80"
+              style="fill:rgb(0,142,214);"
+            />
+            <rect
+              x="10"
+              y="110"
+              width="80"
+              height="80"
+              style="fill:rgb(0,71,190);"
+            />
+          </svg>
 
-    <p>
-      Matt Herold
-      <br />
-      &copy; Copyright 2006-2024
-    </p>
-  </aside>
-  <nav>
-    <h6 class="footer-title">Tools - Publishing</h6>
-    <a href="https://www.matt-herold.de/blog/ghost/#/dashboard" class="link link-hover">Ghost</a>
-    <a href="https://app.netlify.com/login" class="link link-hover">Netlify</a>
-    <a href="https://github.com/matt-do-it" class="link link-hover">Github</a>
-    <h6 class="footer-title pt-16">Tools - Data</h6>
-    <a href="https://www.matt-herold.de/contact/admin/" class="link link-hover">Contacts</a>
-  </nav>
-  <nav>
-    <h6 class="footer-title">Tools - Datascience</h6>
-    <a href="http://10.0.2.1:9000/jupyter/lab" class="link link-hover">Notebooks</a>
-    <a href="https://accounts.datastax.com/session-service/v1/login" class="link link-hover">Cassandra</a>
-    <a href="https://mattdo.budibase.app/app/contact" class="link link-hover">Data Admin</a>
-    <h6 class="footer-title  pt-16">Tools - Platforms</h6>
-    <a href="https://cloud.google.com/gcp/" class="link link-hover">GCP</a>
-    <a href="https://www.digitalocean.com" class="link link-hover">Digital Ocean</a>
-  </nav>
-  <nav>
-    <h6 class="footer-title">Legal</h6>
-    <a class="link link-hover">Imprint</a>
-  </nav>
-  <nav>
-  </nav>
-</footer>
-</div>
-</div>
+          <p>
+            Matt Herold
+            <br />
+            &copy; Copyright 2006-2024
+          </p>
+        </aside>
+        <nav>
+          <h6 class="footer-title">Tools - Publishing</h6>
+          <a
+            href="https://www.matt-herold.de/blog/ghost/#/dashboard"
+            class="link link-hover"
+          >Ghost</a>
+          <a
+            href="https://app.netlify.com/login"
+            class="link link-hover"
+          >Netlify</a>
+          <a
+            href="https://github.com/matt-do-it"
+            class="link link-hover"
+          >Github</a>
+          <h6 class="footer-title pt-16">Tools - Data</h6>
+          <a
+            href="https://www.matt-herold.de/contact/admin/"
+            class="link link-hover"
+          >Contacts</a>
+        </nav>
+        <nav>
+          <h6 class="footer-title">Tools - Datascience</h6>
+          <a
+            href="http://10.0.2.1:9000/jupyter/lab"
+            class="link link-hover"
+          >Notebooks</a>
+          <a
+            href="https://accounts.datastax.com/session-service/v1/login"
+            class="link link-hover"
+          >Cassandra</a>
+          <a
+            href="https://mattdo.budibase.app/app/contact"
+            class="link link-hover"
+          >Data Admin</a>
+          <h6 class="footer-title pt-16">Tools - Platforms</h6>
+          <a
+            href="https://cloud.google.com/gcp/"
+            class="link link-hover"
+          >GCP</a>
+          <a href="https://www.digitalocean.com" class="link link-hover">Digital
+            Ocean</a>
+        </nav>
+        <nav>
+          <h6 class="footer-title">Legal</h6>
+          <a class="link link-hover">Imprint</a>
+        </nav>
+        <nav>
+        </nav>
+      </footer>
+    </div>
+  </div>
 </div>

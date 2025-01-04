@@ -1,104 +1,104 @@
-<div class="border-b border-base-300 mb-24">
-  <div class="container mx-auto">
-    <div class="mt-4 mb-4">
-      <div class="prose">
-        <h1>Login</h1>
-      </div>
-    </div>
-  </div>
-</div>
+<AdminHeader />
 
 {{#if this.isSubmitError}}
   <div class="mx-auto container">
-  <div class="w-3/5">
+    <div class="w-3/5">
 
-    <div role="alert" class="alert alert-error">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 shrink-0 stroke-current"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-      <span>Login failed. Please check your credentials.</span>
-    </div>
+      <div role="alert" class="alert alert-error">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span>Login failed. Please check your credentials.</span>
+      </div>
     </div>
   </div>
 {{/if}}
 
 <div class="mx-auto container mt-8 mb-32">
-<div class="w-3/5">
-  <div class="field">
-    <label class="form-control w-full">
+  <div class="w-3/5">
+    <div class="field">
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Login</span>
+        </div>
+        <Input
+          @type="text"
+          @value={{this.model.username}}
+          placeholder="Enter your email address"
+          class={{if
+            (or
+              (not this.isSubmitError)
+              this.model.validations.attrs.username.isValid
+            )
+            "input input-bordered w-full"
+            "input input-bordered w-full input-error"
+          }}
+        />
+      </label>
       <div class="label">
-        <span class="label-text">Login</span>
+        <span class="label-text-alt">
+          {{#if
+            (and
+              this.isSubmitError (not this.model.validations.username.isValid)
+            )
+          }}
+            <span
+              class="text-error"
+            >{{this.model.validations.attrs.username.messages}}</span>
+          {{/if}}
+        </span>
       </div>
-      <Input
-        @type="text"
-        @value={{this.model.username}}
-        placeholder="Enter your email address"
-        class={{if
-          (or
-            (not this.isSubmitError)
-            this.model.validations.attrs.username.isValid
-          )
-          "input input-bordered w-full"
-          "input input-bordered w-full input-error"
-        }}
-      />
-    </label>
-    <div class="label">
-      <span class="label-text-alt">
-        {{#if
-          (and this.isSubmitError (not this.model.validations.username.isValid))
-        }}
-          <span
-            class="text-error"
-          >{{this.model.validations.attrs.username.messages}}</span>
-        {{/if}}
-      </span>
+    </div>
+
+    <div class="field">
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Password</span>
+        </div>
+        <Input
+          @type="password"
+          @value={{this.model.password}}
+          placeholder="Enter your password"
+          class={{if
+            (or
+              (not this.isSubmitError)
+              this.model.validations.attrs.password.isValid
+            )
+            "input input-bordered w-full"
+            "input input-bordered w-full input-error"
+          }}
+        />
+      </label>
+      <div class="label">
+        <span class="label-text-alt">
+          {{#if
+            (and
+              this.isSubmitError (not this.model.validations.password.isValid)
+            )
+          }}
+            <span
+              class="text-error"
+            >{{this.model.validations.attrs.password.messages}}</span>
+          {{/if}}
+        </span>
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <label class="form-control w-full">
-      <div class="label">
-        <span class="label-text">Password</span>
-      </div>
-      <Input
-        @type="password"
-        @value={{this.model.password}}
-        placeholder="Enter your password"
-        class={{if
-          (or
-            (not this.isSubmitError)
-            this.model.validations.attrs.password.isValid
-          )
-          "input input-bordered w-full"
-          "input input-bordered w-full input-error"
-        }}
-      />
-    </label>
-    <div class="label">
-      <span class="label-text-alt">
-        {{#if
-          (and this.isSubmitError (not this.model.validations.password.isValid))
-        }}
-          <span
-            class="text-error"
-          >{{this.model.validations.attrs.password.messages}}</span>
-        {{/if}}
-      </span>
-    </div>
-  </div>
-  </div>
-
-  <button class="btn btn-primary" {{on "click" this.submit}}>Login</button>
+  <button
+    class="btn btn-primary"
+    type="button"
+    {{on "click" this.submit}}
+  >Login</button>
 
 </div>

@@ -1,0 +1,44 @@
+<div class="border-b border-base-300">
+  <div class="ml-[4vmin] mr-[4vmin] md:mr-8 md:ml-8">
+    <div class="container mx-auto pt-px">
+      <div class="flex items-center h-[64px] md:h-[64px]">
+        <div class="flex-1 mt-[-5px] md:mt-0 md:h-[40px]">
+          <a
+            href="/index.html"
+            class="align-baseline font-extrabold text-l leading-[40px]"
+          ><img
+              class="inline mr-2"
+              src="https://www.matt-herold.de/assets/pictures/logo.svg"
+              width="32"
+            />
+            BACKEND</a>
+        </div>
+
+        <div class="flex-none">
+          <ul class="menu menu-horizontal px-1 text-sm md:text-base">
+          </ul>
+        </div>
+        {{#if this.isLoggedIn}}
+          <div class="dropdown dropdown-end">
+
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+              <div class="avatar placeholder">
+                <div class="bg-neutral text-neutral-content w-10 rounded-full">
+                  <span>{{this.profile.shortName}}</span>
+                </div>
+              </div>
+            </div>
+            <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li class="p-2">Logged in as: {{this.profile.user}}</li>
+              <li><a href="" {{on "click" this.logout}}>Logout</a></li>
+            </ul>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+</div>
