@@ -10,16 +10,14 @@
       @updateLimit={{this.parent.updateLimit}}
     />
   </AdminDisplay>
-  <AdminForm>
-    <AdminTable
-      @columns={{this.parent.columns}}
-      @sort={{this.parent.sort}}
-      @rows={{this.model}}
-      @selection={{this.parent.selection}}
-      @updateSort={{this.parent.updateSort}}
-      @updateSelection={{this.parent.updateSelection}}
-    />
-  </AdminForm>
+  <AdminTable
+    @columns={{this.parent.columns}}
+    @sort={{this.parent.sort}}
+    @rows={{this.model}}
+    @selection={{this.parent.selection}}
+    @updateSort={{this.parent.updateSort}}
+    @updateSelection={{this.parent.updateSelection}}
+  />
   <AdminIndexActions
     @offset={{this.parent.offset}}
     @limit={{this.parent.limit}}
@@ -27,4 +25,5 @@
     @updateOffset={{this.parent.updateOffset}}
     @createRecord={{this.parent.createRecord}}
   />
+  <AdminFooter />
 </AdminScreen>

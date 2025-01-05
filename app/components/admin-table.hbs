@@ -1,37 +1,46 @@
-<table class="table table-border table-sm table-pin-rows table-fixed w-full">
-  <thead>
-    <tr>
-      {{#each this.args.columns as |column|}}
-        <th
-          class="bg-base-100 cursor-pointer"
-          {{on "click" (fn this.args.updateSort column.valuePath)}}
-        >
-          {{column.name}}
-          {{#if (eq column.valuePath this.sortValuePath)}}
-            {{#if this.sortDesc}}
-              ▲
-            {{else}}
-              ▼
-            {{/if}}
-          {{/if}}
-        </th>
-      {{/each}}
-    </tr>
-  </thead>
-  <tbody>
-    {{#each this.args.rows as |contact|}}
-      <tr
-        class="hover
-          {{if
-            (eq contact this.args.selection)
-            'bg-neutral text-neutral-content'
-          }}"
-        {{on "click" (fn this.args.updateSelection contact)}}
-      >
-        {{#each this.args.columns as |column|}}
-          <td>{{get contact column.valuePath}}</td>
+<div class="flex-1 h-32 grow shrink container mx-auto flex flex-col pl-4 pr-4">
+  <div
+    class="border border-base-200 rounded-xl mt-2 mb-2 pt-2 grow shrink overflow-auto"
+  >
+
+    <table
+      class="table table-border table-sm table-pin-rows table-fixed w-full"
+    >
+      <thead>
+        <tr>
+          {{#each this.args.columns as |column|}}
+            <th
+              class="bg-base-100 cursor-pointer"
+              {{on "click" (fn this.args.updateSort column.valuePath)}}
+            >
+              {{column.name}}
+              {{#if (eq column.valuePath this.sortValuePath)}}
+                {{#if this.sortDesc}}
+                  ▲
+                {{else}}
+                  ▼
+                {{/if}}
+              {{/if}}
+            </th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.args.rows as |contact|}}
+          <tr
+            class="hover
+              {{if
+                (eq contact this.args.selection)
+                'bg-neutral text-neutral-content'
+              }}"
+            {{on "click" (fn this.args.updateSelection contact)}}
+          >
+            {{#each this.args.columns as |column|}}
+              <td>{{get contact column.valuePath}}</td>
+            {{/each}}
+          </tr>
         {{/each}}
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>

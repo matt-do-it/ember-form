@@ -36,22 +36,6 @@ module.exports = {
       serif: ['Georgia', 'Times', 'serif'],
       mono: ['Menlo', '"Courier"', 'monospace'],
     },
-
-    fontSize: {
-      xs: ['0.75rem', { lineHeight: '1rem' }],
-      sm: ['0.875rem', { lineHeight: '1.25rem' }],
-      base: ['1rem', { lineHeight: '1.5rem' }],
-      lg: ['1.125rem', { lineHeight: '1.75rem' }],
-      xl: ['1.25rem', { lineHeight: '1.75rem' }],
-      '2xl': ['1.625rem', { lineHeight: '2rem' }],
-      '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-      '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-      '5xl': ['3rem', { lineHeight: '1' }],
-      '6xl': ['3.75rem', { lineHeight: '1' }],
-      '7xl': ['4.5rem', { lineHeight: '1' }],
-      '8xl': ['6rem', { lineHeight: '1' }],
-      '9xl': ['8rem', { lineHeight: '1' }],
-    },
   },
   daisyui: {
     themes: [
@@ -62,6 +46,15 @@ module.exports = {
           accent: '#37cdbe',
           neutral: '#3d4451',
           'base-100': '#ffffff',
+          '--rounded-box': '1rem', // border radius rounded-box utility class, used in card and other large boxes
+          '--rounded-btn': '0.5rem', // border radius rounded-btn utility class, used in buttons and similar element
+          '--rounded-badge': '1.9rem', // border radius rounded-badge utility class, used in badges and similar
+          '--animation-btn': '0.25s', // duration of animation when you click on button
+          '--animation-input': '0.2s', // duration of animation for inputs like checkbox, toggle, radio, etc
+          '--btn-focus-scale': '0.95', // scale transform of button when you focus on it
+          '--border-btn': '1px', // border width of buttons
+          '--tab-border': '1px', // border width of tabs
+          '--tab-radius': '0.5rem', // border radius of tabs
         },
       },
     ],

@@ -5,3 +5,7 @@
 .ember-table table {
   @apply table w-full;
 }
+
+.btn {
+  @apply font-normal;
+}
