@@ -14,7 +14,7 @@ export default class AdminBaseIndexController extends Controller {
     return applicationInstance.lookup(`controller:admin.${this.modelName}`);
   }
 
-  @action create() {
+  @action createRecord() {
     this.router.transitionTo('admin.' + this.modelName + '.edit', 'new');
   }
 }

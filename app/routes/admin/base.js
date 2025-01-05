@@ -41,7 +41,7 @@ export default class AdminBaseRoute extends Route {
       })
       .then((result) => {
         let meta = result.meta;
-        this.controllerFor('admin').totalRecords = meta.total;
+        this.controllerFor('admin.' + this.modelName).totalRecords = meta.total;
         return result;
       });
 

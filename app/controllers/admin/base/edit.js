@@ -12,27 +12,6 @@ export default class AdminBaseEditController extends Controller {
     return applicationInstance.lookup(`controller:admin.${this.modelName}`);
   }
 
-  @action delete() {
-    this.model.destroyRecord().then(
-      function (e) {
-        this.router.transitionTo('admin.' + this.modelName + '.index');
-      }.bind(this),
-    );
-  }
-
-  @action cancel() {
-    this.router.transitionTo('admin.' + this.modelName + '.index');
-  }
-
-  @action save() {
-    if (this.model.validations.isValid) {
-      this.model.save().then(
-        function (e) {
-          this.router.transitionTo('admin.' + this.modelName + '.index');
-        }.bind(this),
-      );
-    }
-  }
 
   get modelAttributes() {
     var a = [];

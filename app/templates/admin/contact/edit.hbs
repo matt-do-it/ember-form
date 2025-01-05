@@ -2,20 +2,9 @@
 
 <div class="flex flex-col h-screen">
   <AdminHeader />
+  <AdminBar />
 
-  <div class="container mx-auto mt-4 flex-none">
-    <div class="inline-block">
-      <div role="tablist" class="tabs tabs-lifted">
-        <a role="tab" class="tab tab-active">Kontakte</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="flex-1 h-32 grow shrink container mx-auto flex flex-col">
-    <div
-      class="border border-base-200 rounded-xl mt-2 mb-2 p-4 grow shrink overflow-auto"
-    >
-
+  <AdminForm>
       <AdminInput
         @label="Name"
         @model={{this.model}}
@@ -31,34 +20,7 @@
       <AdminTextarea @label="Message" @model={{this.model}} @path="message" />
       <AdminInput @label="Created at" @model={{this.model}} @path="createdAt" />
       <AdminInput @label="Updated at" @model={{this.model}} @path="updatedAt" />
-    </div>
-  </div>
+  </AdminForm>
 
-  <div class="flex-none border-t border-base-300">
-    <div class="container mx-auto mt-4 mb-4 flex flex-col">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <button
-            class="btn btn-sm btn-error"
-            type="button"
-            {{on "click" this.delete}}
-          >L&ouml;schen</button>
-
-        </div>
-        <div class="flex items-center gap-2">
-          <button
-            class="btn btn-sm"
-            type="button"
-            {{on "click" this.cancel}}
-          >Abbrechen</button>
-          <button
-            class="btn btn-sm btn-primary"
-            type="button"
-            {{on "click" this.save}}
-          >Sichern</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
+  <AdminEditActions @model={{this.model}}/>
 </div>

@@ -2,142 +2,35 @@
 
 <div class="flex flex-col h-screen">
   <AdminHeader />
-
-  <div class="container mx-auto mt-4 flex-none">
-    <div class="inline-block">
-      <div role="tablist" class="tabs tabs-lifted">
-        <a role="tab" class="tab tab-active">Kontakte</a>
-      </div>
-    </div>
-  </div>
+  <AdminBar />
 
   <div class="container mx-auto mt-4 flex-none flex flex-col">
     <div class="flex items-center justify-between">
       <div class="">
-        <div class="flex items-center gap-4">
-          <label class="input input-bordered input-sm flex items-center gap-2">
-            <Input
-              @type="text"
-              @value={{this.parent.filter}}
-              class="grow"
-              placeholder="Suche"
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              class="h-4 w-4 opacity-70"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </label>
-        </div>
+        <AdminSearch
+          @value={{this.parent.filter}}/>
       </div>
       <div class="">
-        <div class="flex items-center gap-4">
-          <div class="text-sm">
-            Pro Seite
-          </div>
-          <select
-            class="select select-sm select-bordered"
-            {{on "change" this.parent.setLimit}}
-          >
-            {{#each this.parent.limitList as |o|}}
-              <option selected={{o.isActive}}>{{o.limit}}</option>
-            {{/each}}
-          </select>
-        </div>
+        <AdminPageSize
+          @limit={{this.parent.limit}}
+          @updateLimit={{this.parent.updateLimit}}/>
       </div>
     </div>
   </div>
-
-  <div class="flex-1 h-32 container mx-auto flex flex-col">
-    <div class="border border-base-200 rounded-xl mt-2 mb-2 overflow-auto">
-      <table
-        class="table table-border table-sm table-pin-rows table-fixed w-full"
-      >
-        <thead>
-          <tr>
-            {{#each this.parent.columns as |column|}}
-              <th
-                class="bg-base-100 cursor-pointer"
-                {{on "click" (fn this.parent.updateSort column.valuePath)}}
-              >
-                {{column.name}}
-                {{#if (eq column.valuePath this.parent.sortValuePath)}}
-                  {{#if this.sortDesc}}
-                    ▲
-                  {{else}}
-                    ▼
-                  {{/if}}
-                {{/if}}
-              </th>
-            {{/each}}
-          </tr>
-        </thead>
-        <tbody>
-          {{#each this.model as |contact|}}
-            <tr
-              class="hover
-                {{if
-                  (eq contact this.parent.selection)
-                  'bg-neutral text-neutral-content'
-                }}"
-              {{on "click" (fn this.parent.updateSelection contact)}}
-            >
-              {{#each this.parent.columns as |column|}}
-                <td>{{(get contact column.valuePath)}}</td>
-              {{/each}}
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="flex-none border-t border-base-300">
-    <div class="container mx-auto mt-4 mb-4 flex flex-col">
-
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <button
-            class="btn btn-sm btn-primary"
-            type="button"
-            {{on "click" this.create}}
-          >Hinzufügen</button>
-        </div>
-        <div class="flex items-center gap-4">
-          <div class="text-sm">
-            {{#if (gt this.parent.totalRecords 0)}}
-              Zeige
-              {{this.parent.offsetFormatted}}
-              bis
-              {{this.parent.offsetNextFormatted}}
-              von
-              {{this.parent.totalRecords}}
-            {{/if}}
-          </div>
-          {{#if (gt this.parent.pageList.length 1)}}
-            <div class="join">
-              {{#each this.parent.pageList as |page|}}
-                <LinkTo
-                  @route="admin"
-                  @query={{hash offset=page.offset limit=this.parent.limit}}
-                  class={{if
-                    page.isActive
-                    "join-item btn btn-sm"
-                    "join-item btn btn-sm btn-active"
-                  }}
-                >{{page.title}}</LinkTo>
-              {{/each}}
-            </div>
-          {{/if}}
-        </div>
-      </div>
-
-    </div>
-  </div>
+  <AdminForm>
+    <AdminTable
+      @columns={{this.parent.columns}}
+      @sort={{this.parent.sort}}
+      @rows={{this.model}}
+      @selection={{this.parent.selection}}
+      @updateSort={{this.parent.updateSort}}
+      @updateSelection={{this.parent.updateSelection}}
+    />
+    </AdminForm>
+  <AdminIndexActions
+    @offset={{this.parent.offset}}
+    @limit={{this.parent.limit}}
+    @totalRecords={{this.parent.totalRecords}}
+    @updateOffset={{this.parent.updateOffset}}
+    @createRecord={{this.parent.createRecord}}/>
 </div>

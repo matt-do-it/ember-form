@@ -3,7 +3,7 @@
     <span class="label-text font-bold text-xs">{{@label}}</span>
   </div>
   <Textarea
-    @value={{(get @model @path)}}
+    @value={{get @model @path}}
     placeholder="Type here"
     class="input input-bordered input-sm w-full h-32 p-1 max-w-lg
       {{if
@@ -14,7 +14,7 @@
   <div class="label">
     {{#if (not (get @model (concat "validations.attrs." @path ".isValid")))}}
       <span class="label-text-alt text-error">
-        {{(get @model (concat "validations.attrs." @path ".messages"))}}
+        {{get @model (concat "validations.attrs." @path ".messages")}}
       </span>
     {{/if}}
   </div>
