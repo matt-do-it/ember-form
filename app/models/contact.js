@@ -8,9 +8,9 @@ const Validations = buildValidations({
 });
 
 export default class ContactModel extends Model.extend(Validations) {
-  @attr name;
-  @attr email;
-  @attr message;
-  @attr createdAt;
-  @attr updatedAt;
+  @attr('string') name;
+  @attr('string') email;
+  @attr('string') message;
+  @attr('string') createdAt;
+  @attr('string') updatedAt;
 }

@@ -15,11 +15,22 @@
     <div
       class="border border-base-200 rounded-xl mt-2 mb-2 p-4 grow shrink overflow-auto"
     >
-      <AdminInput @label="Name" @model={{this.model}} @path="name" />
-      <AdminInput @label="E-Mail" @model={{this.model}} @path="email" />
+
+      <AdminInput
+        @label="Name"
+        @model={{this.model}}
+        @path="name"
+        @placeholder="Name"
+      />
+      <AdminInput
+        @label="Email"
+        @model={{this.model}}
+        @path="email"
+        @placeholder="E-Mail"
+      />
       <AdminTextarea @label="Message" @model={{this.model}} @path="message" />
-      <AdminInput @label="Created At" @model={{this.model}} @path="createdAt" />
-      <AdminInput @label="Updated At" @model={{this.model}} @path="updatedAt" />
+      <AdminInput @label="Created at" @model={{this.model}} @path="createdAt" />
+      <AdminInput @label="Updated at" @model={{this.model}} @path="updatedAt" />
     </div>
   </div>
 
@@ -31,7 +42,7 @@
             class="btn btn-sm btn-error"
             type="button"
             {{on "click" this.delete}}
-          >Löschen</button>
+          >L&ouml;schen</button>
 
         </div>
         <div class="flex items-center gap-2">

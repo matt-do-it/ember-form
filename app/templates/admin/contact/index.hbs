@@ -18,7 +18,7 @@
           <label class="input input-bordered input-sm flex items-center gap-2">
             <Input
               @type="text"
-              @value={{this.admin.filter}}
+              @value={{this.parent.filter}}
               class="grow"
               placeholder="Suche"
             />
@@ -44,9 +44,9 @@
           </div>
           <select
             class="select select-sm select-bordered"
-            {{on "change" this.admin.setLimit}}
+            {{on "change" this.parent.setLimit}}
           >
-            {{#each this.admin.limitList as |o|}}
+            {{#each this.parent.limitList as |o|}}
               <option selected={{o.isActive}}>{{o.limit}}</option>
             {{/each}}
           </select>
@@ -62,13 +62,13 @@
       >
         <thead>
           <tr>
-            {{#each this.admin.columns as |column|}}
+            {{#each this.parent.columns as |column|}}
               <th
                 class="bg-base-100 cursor-pointer"
-                {{on "click" (fn this.admin.updateSort column.valuePath)}}
+                {{on "click" (fn this.parent.updateSort column.valuePath)}}
               >
                 {{column.name}}
-                {{#if (eq column.valuePath this.admin.sortValuePath)}}
+                {{#if (eq column.valuePath this.parent.sortValuePath)}}
                   {{#if this.sortDesc}}
                     ▲
                   {{else}}
@@ -84,12 +84,12 @@
             <tr
               class="hover
                 {{if
-                  (eq contact this.admin.selection)
+                  (eq contact this.parent.selection)
                   'bg-neutral text-neutral-content'
                 }}"
-              {{on "click" (fn this.admin.updateSelection contact)}}
+              {{on "click" (fn this.parent.updateSelection contact)}}
             >
-              {{#each this.admin.columns as |column|}}
+              {{#each this.parent.columns as |column|}}
                 <td>{{(get contact column.valuePath)}}</td>
               {{/each}}
             </tr>
@@ -111,19 +111,21 @@
         </div>
         <div class="flex items-center gap-4">
           <div class="text-sm">
-            Zeige
-            {{this.admin.offsetFormatted}}
-            bis
-            {{this.admin.offsetNextFormatted}}
-            von
-            {{this.admin.totalRecords}}
+            {{#if (gt this.parent.totalRecords 0)}}
+              Zeige
+              {{this.parent.offsetFormatted}}
+              bis
+              {{this.parent.offsetNextFormatted}}
+              von
+              {{this.parent.totalRecords}}
+            {{/if}}
           </div>
-          {{#if (gt this.admin.pageList.length 1)}}
+          {{#if (gt this.parent.pageList.length 1)}}
             <div class="join">
-              {{#each this.admin.pageList as |page|}}
+              {{#each this.parent.pageList as |page|}}
                 <LinkTo
                   @route="admin"
-                  @query={{hash offset=page.offset limit=this.admin.limit}}
+                  @query={{hash offset=page.offset limit=this.parent.limit}}
                   class={{if
                     page.isActive
                     "join-item btn btn-sm"
