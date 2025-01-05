@@ -1,27 +1,27 @@
-  <div class="flex-none border-t border-base-300">
-    <div class="container mx-auto mt-4 mb-4 flex flex-col">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <button
-            class="btn btn-sm btn-error"
-            type="button"
-            {{on "click" this.delete}}
-          >L&ouml;schen</button>
+<div class="flex-none border-t border-base-300">
+  <div class="container mx-auto mt-4 mb-4 flex flex-col">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <button
+          class="btn btn-sm btn-error"
+          type="button"
+          {{on "click" this.delete}}
+        >L&ouml;schen</button>
 
-        </div>
-        <div class="flex items-center gap-2">
-          <button
-            class="btn btn-sm"
-            type="button"
-            {{on "click" this.cancel}}
-          >Abbrechen</button>
-          <button
-            class="btn btn-sm btn-primary"
-            type="button"
-            {{on "click" this.save}}
-          >Sichern</button>
-        </div>
       </div>
-
+      <div class="flex items-center gap-2">
+        <button
+          class="btn btn-sm"
+          type="button"
+          {{on "click" this.cancel}}
+        >Abbrechen</button>
+        <button
+          class="btn btn-sm btn-primary"
+          type="button"
+          {{on "click" this.save}}
+        >Sichern</button>
+      </div>
     </div>
+
   </div>
+</div>

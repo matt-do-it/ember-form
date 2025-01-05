@@ -25,7 +25,6 @@ export default class AdminBaseController extends Controller {
     this.router.transitionTo('admin.' + this.modelName + '.edit', 'new');
   }
 
-
   @action updateLimit(value, event) {
     this.limit = value;
     this.offset = 0;
@@ -54,7 +53,6 @@ export default class AdminBaseController extends Controller {
       this.selection.id,
     );
   }
-
 
   get columns() {
     return [];

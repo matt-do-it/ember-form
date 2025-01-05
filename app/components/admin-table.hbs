@@ -1,38 +1,37 @@
-      <table
-        class="table table-border table-sm table-pin-rows table-fixed w-full">
-        <thead>
-          <tr>
-            {{#each this.args.columns as |column|}}
-              <th
-                class="bg-base-100 cursor-pointer"
-                {{on "click" (fn this.args.updateSort column.valuePath)}}
-              >
-                {{column.name}}
-                {{#if (eq column.valuePath this.sortValuePath)}}
-                  {{#if this.sortDesc}}
-                    ▲
-                  {{else}}
-                    ▼
-                  {{/if}}
-                {{/if}}
-              </th>
-            {{/each}}
-          </tr>
-        </thead>
-        <tbody>
-          {{#each this.args.rows as |contact|}}
-            <tr
-              class="hover
-                {{if
-                  (eq contact this.args.selection)
-                  'bg-neutral text-neutral-content'
-                }}"
-              {{on "click" (fn this.args.updateSelection contact)}}
-            >
-              {{#each this.args.columns as |column|}}
-                <td>{{get contact column.valuePath}}</td>
-              {{/each}}
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
+<table class="table table-border table-sm table-pin-rows table-fixed w-full">
+  <thead>
+    <tr>
+      {{#each this.args.columns as |column|}}
+        <th
+          class="bg-base-100 cursor-pointer"
+          {{on "click" (fn this.args.updateSort column.valuePath)}}
+        >
+          {{column.name}}
+          {{#if (eq column.valuePath this.sortValuePath)}}
+            {{#if this.sortDesc}}
+              ▲
+            {{else}}
+              ▼
+            {{/if}}
+          {{/if}}
+        </th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.args.rows as |contact|}}
+      <tr
+        class="hover
+          {{if
+            (eq contact this.args.selection)
+            'bg-neutral text-neutral-content'
+          }}"
+        {{on "click" (fn this.args.updateSelection contact)}}
+      >
+        {{#each this.args.columns as |column|}}
+          <td>{{get contact column.valuePath}}</td>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

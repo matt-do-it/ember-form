@@ -1,22 +1,15 @@
 {{page-title "Admin"}}
 
-<div class="flex flex-col h-screen">
+<AdminScreen>
   <AdminHeader />
   <AdminBar />
-
-  <div class="container mx-auto mt-4 flex-none flex flex-col">
-    <div class="flex items-center justify-between">
-      <div class="">
-        <AdminSearch
-          @value={{this.parent.filter}}/>
-      </div>
-      <div class="">
-        <AdminPageSize
-          @limit={{this.parent.limit}}
-          @updateLimit={{this.parent.updateLimit}}/>
-      </div>
-    </div>
-  </div>
+  <AdminDisplay>
+    <AdminSearch @value={{this.parent.filter}} />
+    <AdminPageSize
+      @limit={{this.parent.limit}}
+      @updateLimit={{this.parent.updateLimit}}
+    />
+  </AdminDisplay>
   <AdminForm>
     <AdminTable
       @columns={{this.parent.columns}}
@@ -26,11 +19,12 @@
       @updateSort={{this.parent.updateSort}}
       @updateSelection={{this.parent.updateSelection}}
     />
-    </AdminForm>
+  </AdminForm>
   <AdminIndexActions
     @offset={{this.parent.offset}}
     @limit={{this.parent.limit}}
     @totalRecords={{this.parent.totalRecords}}
     @updateOffset={{this.parent.updateOffset}}
-    @createRecord={{this.parent.createRecord}}/>
-</div>
+    @createRecord={{this.parent.createRecord}}
+  />
+</AdminScreen>

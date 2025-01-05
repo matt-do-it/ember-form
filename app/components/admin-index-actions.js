@@ -87,5 +87,4 @@ export default class AdminEditActions extends Component {
   @action updateOffset(value) {
     this.args.updateOffset(value);
   }
-
 }

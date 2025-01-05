@@ -12,7 +12,6 @@ export default class AdminBaseEditController extends Controller {
     return applicationInstance.lookup(`controller:admin.${this.modelName}`);
   }
 
-
   get modelAttributes() {
     var a = [];
     this.model.eachAttribute(function (attribute, meta) {

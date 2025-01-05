@@ -1,0 +1,24 @@
+<label class="form-control w-full">
+  <div class="label">
+    <span class="label-text font-bold text-xs">{{@label}}</span>
+  </div>
+  <Input
+    @value={{get @model @path}}
+    placeholder={{@placeholder}}
+    class="input input-bordered input-sm w-full max-w-lg
+      {{if
+        (and
+          (get @model (concat 'validations.attrs.' @path))
+          (not (get @model (concat 'validations.attrs.' @path '.isValid')))
+        )
+        'input-error'
+      }}"
+  />
+  <div class="label">
+    {{#if (not (get @model (concat "validations.attrs." @path ".isValid")))}}
+      <span class="label-text-alt text-error">
+        {{get @model (concat "validations.attrs." @path ".messages")}}
+      </span>
+    {{/if}}
+  </div>
+</label>

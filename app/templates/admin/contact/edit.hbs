@@ -1,26 +1,28 @@
 {{page-title "Admin"}}
 
-<div class="flex flex-col h-screen">
+<AdminScreen>
   <AdminHeader />
   <AdminBar />
-
   <AdminForm>
-      <AdminInput
-        @label="Name"
-        @model={{this.model}}
-        @path="name"
-        @placeholder="Name"
-      />
-      <AdminInput
-        @label="Email"
-        @model={{this.model}}
-        @path="email"
-        @placeholder="E-Mail"
-      />
-      <AdminTextarea @label="Message" @model={{this.model}} @path="message" />
-      <AdminInput @label="Created at" @model={{this.model}} @path="createdAt" />
-      <AdminInput @label="Updated at" @model={{this.model}} @path="updatedAt" />
+    <AdminInput
+      @label="Name"
+      @model={{this.model}}
+      @path="name"
+      @placeholder="Name"
+    />
+    <AdminInput
+      @label="Email"
+      @model={{this.model}}
+      @path="email"
+      @placeholder="E-Mail"
+    />
+    <AdminTextarea @label="Message" @model={{this.model}} @path="message" />
+    <AdminInputDate
+      @label="Created at"
+      @model={{this.model}}
+      @path="createdAt"
+    />
+    <AdminInput @label="Updated at" @model={{this.model}} @path="updatedAt" />
   </AdminForm>
-
-  <AdminEditActions @model={{this.model}}/>
-</div>
+  <AdminEditActions @model={{this.model}} />
+</AdminScreen>

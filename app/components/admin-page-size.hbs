@@ -1,13 +1,13 @@
-        <div class="flex items-center gap-4">
-          <div class="text-sm">
-            Pro Seite
-          </div>
-          <select
-            class="select select-sm select-bordered"
-            {{on "change" (fn this.updateLimit)}}
-          >
-            {{#each this.limitList as |o|}}
-              <option selected={{o.isActive}}>{{o.limit}}</option>
-            {{/each}}
-          </select>
-        </div>
+<div class="flex items-center gap-4">
+  <div class="text-sm">
+    Pro Seite
+  </div>
+  <select
+    class="select select-sm select-bordered"
+    {{on "change" (fn this.updateLimit)}}
+  >
+    {{#each this.limitList as |o|}}
+      <option selected={{o.isActive}}>{{o.limit}}</option>
+    {{/each}}
+  </select>
+</div>
