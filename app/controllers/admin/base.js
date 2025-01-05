@@ -14,7 +14,7 @@ export default class AdminBaseController extends Controller {
   @tracked totalRecords = null;
 
   @tracked offset = 0;
-  @tracked limit = 1;
+  @tracked limit = 10;
 
   @tracked sort = 'createdAt';
   @tracked filter = '';
