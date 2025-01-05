@@ -12,18 +12,22 @@ export default class AdminContactController extends AdminBaseController {
       {
         name: `Name`,
         valuePath: `name`,
+        mobile: true,
       },
       {
         name: `Email`,
         valuePath: `email`,
+        mobile: false,
       },
       {
         name: `Message`,
         valuePath: `message`,
+        mobile: false,
       },
       {
         name: `Created at`,
         valuePath: `createdAt`,
+        mobile: false,
       },
     ];
   }

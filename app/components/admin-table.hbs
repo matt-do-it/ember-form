@@ -7,10 +7,12 @@
         <tr>
           {{#each this.args.columns as |column|}}
             <th
-              class="bg-base-100 cursor-pointer"
+              class="bg-base-100 cursor-pointer
+                {{if (not column.mobile) 'sm:table-cell hidden'}}"
               {{on "click" (fn this.args.updateSort column.valuePath)}}
             >
               {{column.name}}
+              {{column.isMobile}}
               {{#if (eq column.valuePath this.sortValuePath)}}
                 {{#if this.sortDesc}}
                   ▲
@@ -33,7 +35,9 @@
             {{on "click" (fn this.args.updateSelection contact)}}
           >
             {{#each this.args.columns as |column|}}
-              <td>{{get contact column.valuePath}}</td>
+              <td
+                class="{{if (not column.mobile) 'sm:table-cell hidden'}}"
+              >{{get contact column.valuePath}}</td>
             {{/each}}
           </tr>
         {{/each}}
